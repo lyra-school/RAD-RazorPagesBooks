@@ -12,8 +12,8 @@ using RazorPagesBooks.Data;
 namespace RazorPagesBooks.Migrations
 {
     [DbContext(typeof(RazorPagesBooksContext))]
-    [Migration("20241014102831_initial")]
-    partial class initial
+    [Migration("20241026173746_FluentAndNewAnnotation")]
+    partial class FluentAndNewAnnotation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,10 @@ namespace RazorPagesBooks.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CoverURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Publication")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("PublicationDate")
@@ -46,10 +50,12 @@ namespace RazorPagesBooks.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Summary")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
